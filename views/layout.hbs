@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+  <title>expressProject</title>
+</head>
+<body>
+  <header role="banner" class="mar-t-5 pad-t-2 pad-b-4 pad-s-1 wrap-float bg-white">
+    <div class="max-w-700 center wrap-float">
+      <nav class="clearfix mar-b-1">
+        <ul class="no-bullets no-margin no-padding right">
+          
+          {{#if isSigned}}
+            <li class="pipe-separate t-light-green left"><a href="/signup">register</a></li>
+            <li class="pipe-separate t-light-green left"><a href="/login">login</a></li>
+          {{/if}}
+          {{#if username}}
+           <li class="pipe-separate t-light-green left"><a href="/">home</a></li>
+            <li class="pipe-separate t-light-green left"><a href="/profile">{{username}}'s profile</a></li>
+            <li class="pipe-separate t-light-green left"><a href="/logout">logout</a></li>
+          {{/if}}
+        </ul>
+      </nav>
+      </div>
+      </header>
+  {{{body}}}
+</body>
+</html>
