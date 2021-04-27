@@ -23,7 +23,7 @@ app.use(cookieParser());
 const options = {
   store: new FileStore(),
   key: 'user_sid',
-  secret: process.env.SESSION_SECRET,
+  secret: 'fsjdhfsdg89dsghg',
   resave: false,
   saveUninitialized: false,
   cookie: {
