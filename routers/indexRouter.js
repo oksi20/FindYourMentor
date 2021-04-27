@@ -5,12 +5,14 @@ const {sessionChecker}=require('../middleware/auth');
 const Tag = require('../models/tag.model');
 const User=require('../models/user.model')
 
-router.get('/', sessionChecker, (req, res) => {
+router.get('/',(req, res) => {
   res.redirect('home');
 });
 
-router.get('/home', sessionChecker, (req, res) => {
-  res.render('home', {isSigned:true});
+router.get('/home',async (req, res) => {
+  const mentors = await User.find()
+  console.log(mentors)
+  res.render('home', {mentors});
 });
 
 router.route('/login')
@@ -34,20 +36,21 @@ router
     res.render('signup', {isSigned:true,tags});
   })
   .post(async (req, res, next) => {
-    console.log(req.body)
-    // try {
-    //   const { username, email, password } = req.body;
-    //   const user = new User({
-    //     username,
-    //     email,
-    //     password: await bcrypt.hash(password, Number(process.env.SALT_ROUNDS)),
-    //   });
-    //   await user.save();
-    //   req.session.user = user;
-    //   res.redirect("/entries");
-    // } catch (error) {
-    //   next(error);
-    // }
+    
+    try {
+      const user= req.body;
+            user.password = await bcrypt.hash(user.password, Number(process.env.SALT_ROUNDS))
+            
+      
+      const newuser = new User(user);
+      await newuser.save();
+      const users = await User.find()
+      console.log(users)
+      // req.session.user = user;
+      // res.redirect("/entries");
+    } catch (error) {
+      next(error);
+    }
   });
 
   router.get('/logout', async (req, res, next) => {
