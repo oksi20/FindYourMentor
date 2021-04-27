@@ -1,0 +1,51 @@
+Java
+JavaScript
+Python
+C#
+React
+C++
+Mobile
+Data Science
+Team Lead
+UX/UI
+Product Management
+HTML
+SVG
+Canvas
+Angular
+AngularJS
+Redux
+Botstrap
+Node.js
+Express
+TypeScript
+PHP
+Laravel
+Ruby
+MongoDB
+PostgreSQL
+Rust
+Haskell
+Unity
+SQL
+Android
+Kotlin
+REST API
+Blockchain
+DevOps
+Docker
+Linux
+BigData
+MySQL
+Django
+Vue.js
+Scrum
+Apache
+Oracle
+iOS
+Swift
+Redux Saga
+React Native
+GraphQL
+1C
+
