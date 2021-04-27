@@ -27,7 +27,7 @@ const UserSchema = new Schema({
     required: true,
   },
   experience:{
-    type:Number,
+    type:String,
     required:true,
   },
   // Мы не храним пароль, а только его хэш
