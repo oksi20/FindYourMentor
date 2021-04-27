@@ -6,6 +6,7 @@ const cookieParser = require("cookie-parser");
 const session = require('express-session');
 const FileStore = require('session-file-store')(session);
 
+
 const {cookiesCleaner}=require('./middleware/auth');
 const indexRouter=require('./routers/indexRouter')
 
@@ -38,7 +39,12 @@ app.use(cookiesCleaner);
 
 
 app.use('/', indexRouter);
-
+app.get('/image', (req, res)=>{
+  res.render('image')
+})
+app.post('/image', (req, res)=>{
+  res.send(req.body)
+})
 // useErrorHandlers(app);
 
 module.exports = app;
