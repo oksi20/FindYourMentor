@@ -1,5 +1,6 @@
 const { Schema, model} = require('mongoose');
 const Tag=require('./tag.model');
+const Request=require('./request.model');
 
 const UserSchema = new Schema({
 
@@ -42,6 +43,9 @@ const UserSchema = new Schema({
     minlength: 5,
     match: /^[A-Za-z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
   },
-  tags:[{type:Schema.type.ObjectID, ref:'Tag'}]
+  
+  tags:[{type:Schema.type.ObjectID, ref:'Tag'}],
+
+  requests:[{type:Schema.type.ObjectID, ref:'Request'}]
 });
 module.exports=model('users', UserSchema);
