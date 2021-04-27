@@ -8,7 +8,7 @@ function cookiesCleaner(req, res, next) {
 // middleware function to check for logged-in users
 const sessionChecker = (req, res, next) => {
   if (req.session.user) {
-    res.redirect("/entries");
+    res.redirect('/home');
   } else {
     next();
   }

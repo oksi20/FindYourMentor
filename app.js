@@ -7,6 +7,7 @@ const session = require('express-session');
 const FileStore = require('session-file-store')(session);
 
 const {cookiesCleaner}=require('./middleware/auth');
+const indexRouter=require('./routers/indexRouter')
 
 const app = express();
 
@@ -35,8 +36,9 @@ app.use(session(options));
 app.use(cookiesCleaner);
 
 
+
 app.use('/', indexRouter);
 
-useErrorHandlers(app);
+// useErrorHandlers(app);
 
 module.exports = app;
