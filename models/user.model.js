@@ -1,4 +1,5 @@
 const { Schema, model} = require('mongoose');
+const Tag=require('./tag.model');
 
 const UserSchema = new Schema({
 
@@ -7,7 +8,26 @@ const UserSchema = new Schema({
     required: true,
     unique: true,
     minlength: 3,
-    match: /^[A-Z]\w+$/i,
+  },
+  name:{
+    type: String,
+    required: true,
+  },
+  lastname:{
+    type: String,
+    required: true,
+  },
+  country:{
+    type: String,
+    required: true,
+  },
+  city:{
+    type: String,
+    required: true,
+  },
+  experience:{
+    type:Number,
+    required:true,
   },
   // Мы не храним пароль, а только его хэш
   password: {
@@ -22,5 +42,6 @@ const UserSchema = new Schema({
     minlength: 5,
     match: /^[A-Za-z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
   },
+  tags:[{type:Schema.type.ObjectID, ref:'Tag'}]
 });
 module.exports=model('users', UserSchema);
