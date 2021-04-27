@@ -5,27 +5,27 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
     integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
-  <title>expressProject</title>
+  <title>FindMyMentor</title>
 </head>
 <body>
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
   <div class="container-fluid">
-    <a class="navbar-brand" href="#">expressProject</a>
+    <a class="navbar-brand" href="/">FindMyMentor</a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
     <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
+      <ul class="nav justify-content-center">
         {{#if isSigned}}
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/home">Home</a>
+          <a class="nav-link active" aria-current="page" href="/home">Все менторы</a>
         </li>
         
         <li class="nav-item">
-          <a class="nav-link" href="/login">Login</a>
+          <a class="nav-link" href="/login">Войти</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="/signup">Signup</a>
+          <a class="nav-link" href="/signup">Стать ментором</a>
         </li>
       {{/if}}
       {{#if username}}
@@ -39,7 +39,12 @@
           <a class="nav-link disabled" href="/logout" tabindex="-1" aria-disabled="true">Logout</a>
         </li>
         {{/if}}
+        
       </ul>
+      <form class="d-flex">
+        <input class="form-control me-2" type="search" placeholder="Найти по тэгу" aria-label="Search">
+        <button class="btn btn-outline-success" type="submit">Поиск</button>
+      </form>
     </div>
   </div>
 </nav>
