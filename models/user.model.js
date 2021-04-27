@@ -44,8 +44,8 @@ const UserSchema = new Schema({
     match: /^[A-Za-z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
   },
   
-  tags:[{type:Schema.type.ObjectID, ref:'Tag'}],
+  tags:[{type:Schema.Types.ObjectId, ref:'Tag'}],
 
-  requests:[{type:Schema.type.ObjectID, ref:'Request'}]
+  requests:[{type:Schema.Types.ObjectId, ref:'Request'}]
 });
 module.exports=model('users', UserSchema);
