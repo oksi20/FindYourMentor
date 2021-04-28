@@ -1,0 +1,79 @@
+<div class="container">
+<form id="editForm" method="POST" action="/{{user._id}}/edit/" enctype="multipart/form-data">
+
+  <h1>Редактирование профиля</h1>
+ <div class="input-group mb-3">
+  <span class="input-group-text" id="basic-addon1">Profile picture</span>
+  <input id="image" class="form-control" name="image" type="file">
+    </div>
+
+    <div class="input-group mb-3">
+  <span class="input-group-text" id="basic-addon1">Username</span>
+  <input id="username" class="form-control" name="username" type="text" disabled pattern="[A-Za-z]\w+" minlength="4"
+        title="Латинские буквы, цифры и _" value="{{user.username}}">
+    </div>
+
+    <div class="input-group mb-3">
+  <span class="input-group-text" id="basic-addon1">Email</span>
+  <input id="email" class="form-control" name="email" type="email" required value="{{user.email}}">
+    </div>
+
+ 
+
+    <div class="input-group mb-3">
+  <span class="input-group-text" id="basic-addon1">Имя</span>
+  <input id="name" class="form-control" name="name" type="text" disabled value="{{user.name}}">
+    </div>
+
+    <div class="input-group mb-3">
+  <span class="input-group-text" id="basic-addon1">Фамилия</span>
+  <input id="lastname" class="form-control" name="lastname" type="text" disabled value="{{user.lastname}}">
+    </div>
+
+    <div class="input-group mb-3">
+  <span class="input-group-text" id="basic-addon1">Страна</span>
+  <input id="country" class="form-control" name="country" type="text" required value="{{user.country}}">
+    </div>
+
+    <div class="input-group mb-3">
+  <span class="input-group-text" id="basic-addon1">Город</span>
+  <input id="city" class="form-control" name="city" type="text" required value="{{user.city}}">
+    </div>
+
+    <div class="input-group mb-3">
+  <span class="input-group-text" id="basic-addon1">Опыт работы</span>
+  <input id="experience" class="form-control" name="experience" type="text" required value="{{user.experience}}">
+    </div>
+
+    <div class="input-group">
+  <span class="input-group-text">О себе</span>
+  <textarea class="form-control" aria-label="With textarea" id="aboutMe" name="aboutMe">{{user.aboutMe}}</textarea>
+    </div>
+    <span>Тэги</span>
+  
+  {{#each tags}}
+  
+  {{#if this.checked}}
+    <div class="container">
+  <div class="form-check">
+  <input class="form-check-input" type="checkbox" value="{{this._id}}" name="tags" id="flexCheckDefault" checked>
+  <label class="form-check-label" for="flexCheckDefault">
+    {{this.tag}}
+  </label>
+  </div>
+  </div>
+  {{/if}}
+  <div class="container">
+  <div class="form-check">
+  <input class="form-check-input" type="checkbox" value="{{this._id}}" name="tags" id="flexCheckDefault">
+  <label class="form-check-label" for="flexCheckDefault">
+    {{this.tag}}
+  </label>
+  </div>
+  </div>
+  {{/each}}
+  
+  <br>
+  <button type="submit" class="btn btn-primary">Сохранить</button>
+</form>
+</div>
