@@ -16,7 +16,7 @@ router.get('/',(req, res) => {
 });
 
 router.get('/home',async (req, res) => {
-    const mentors = await User.find()
+    const mentors = await User.find();
     res.render('home', {mentors});
 });
 
