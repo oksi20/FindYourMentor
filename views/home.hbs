@@ -1,4 +1,4 @@
-   <div style="display: flex; justify-content: space-evenly; margin-top: 100px;">
+   <div style="display: flex; justify-content: center; margin-top: 100px;">
    {{#each mentors}}
    <div class="card" style="width: 18rem;">
      {{#if this.image.url}}
@@ -8,7 +8,31 @@
     <h5 class="card-title">{{this.name}} {{this.lastname}}</h5>
     <p class="card-text">Опыт:{{this.experience}}</p>
     <a href="#" class="btn btn-primary">Записаться</a>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target='#{{this.name}}'>
+  Read more about Mentor
+</button>
     </div>
-    </div><br>
-    {{/each}}
+    </div>
+
+<!-- Modal -->
+
+<div class="modal fade" id='{{this.name}}' aria-labelledby="exampleModalLabel">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Hi, my name is {{this.name}}</h5>
+        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        So i love programming
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
   </div>
+</div>
+{{/each}}
+  </div>
+
