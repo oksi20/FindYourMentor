@@ -30,7 +30,7 @@ router
     const {username, password}=req.body;
     const user = await User.findOne({username});
     if (user && (await bcrypt.compare(password, user.password))){
-      req.session.user = user;
+      req.session.user = user._id;
       res.redirect(`/${user.username}`);
     } else {
       res.redirect('/login')
@@ -112,8 +112,50 @@ router
       })
 
   router
-    .route('/:user')
-    .get((req,res) => {
+    .route('/:username')
+    .get(async (req,res) => {
+      const user = await User.findOne({username:req.params.username}).populate('tags')
+      
+      console.log(user)
+      res.render('profile',{ user })
+    })
+
+  router
+    .route('/:id/edit')
+    .get(async (req,res) => {
+
+      const user = await User.findOne({_id:req.params.id}).populate('tags')
+      
+      let tags = await Tag.find().lean()
+
+      const tagsWeHave = user.tags.map(el => el.tag)
+      
+     
+
+      for (let i=0;i<tags.length;i++) {
+        
+        if (tagsWeHave.indexOf(tags[i].tag) !== -1 ) {
+          tags[i].checked = true
+          
+        } else {
+          tags[i].checked = false
+          
+        }
+      }
+      
+      res.render('edit', {user,tags})
+     
+
+     
+    })
+    .post(upload.single('image'),async (req,res) => {
+     
+      
+      const user = await User.findByIdAndUpdate({_id:req.params.id},req.body,{new:true})
+
+      
+
+      res.redirect(`/${user.username}`)
 
     })
 
