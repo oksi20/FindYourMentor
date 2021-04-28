@@ -2,7 +2,7 @@
   "name": "ProjectExpress",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
+  "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "start": "node server.js",
@@ -21,6 +21,7 @@
   "homepage": "https://github.com/oksi20/ProjectExpress#readme",
   "dependencies": {
     "bcrypt": "^5.0.1",
+    "cloudinary": "^1.25.1",
     "cookie-parser": "^1.4.5",
     "dotenv": "^8.2.0",
     "express": "^4.17.1",
@@ -28,6 +29,8 @@
     "hbs": "^4.1.2",
     "mongoose": "^5.12.5",
     "morgan": "^1.10.0",
+    "multer": "^1.4.2",
+    "multer-storage-cloudinary": "^4.0.0",
     "session-file-store": "^1.5.0"
   },
   "devDependencies": {

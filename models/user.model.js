@@ -10,6 +10,10 @@ const UserSchema = new Schema({
     unique: true,
     minlength: 3,
   },
+  image:{
+url:String,
+filename:String
+  },
   name:{
     type: String,
     required: true,

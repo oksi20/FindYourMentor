@@ -1,7 +1,11 @@
 <div class="container">
-<form id="signupForm" method="POST" action="/signup">
+<form id="signupForm" method="POST" action="/signup" enctype="multipart/form-data">
 
   <h1>Стать ментором</h1>
+ <div class="input-group mb-3">
+  <span class="input-group-text" id="basic-addon1">Profile picture</span>
+  <input id="image" class="form-control" name="image" type="file">
+    </div>
 
     <div class="input-group mb-3">
   <span class="input-group-text" id="basic-addon1">Username</span>
