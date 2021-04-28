@@ -6,50 +6,47 @@ const Tag = require('../models/tag.model');
 const User=require('../models/user.model')
 
 router.get('/',(req, res) => {
-  res.redirect('home');
+  res.redirect('/home');
 });
 
 router.get('/home',async (req, res) => {
-  const mentors = await User.find()
-  console.log(mentors)
-  res.render('home', {mentors});
+    const mentors = await User.find()
+    res.render('home', {mentors});
 });
 
-router.route('/login')
-.get(sessionChecker, (req, res)=>{
-  res.render('login',{isSigned:true} );
-})
-.post(async (req, res)=>{
-  const {username, password}=req.body;
-  const user=await User.findOne({username});
-  if (user && (await bcrypt.compare(password, user.password))){
-    req.session.user=user;
-    res.redirect('/entries');
-  } else {
-    res.redirect('/login', {isSigned:true})
-  }
-})
+router
+  .route('/login')
+  .get(sessionChecker, (req, res)=>{
+    res.render('login');
+  })
+
+  .post(async (req, res)=>{
+    const {username, password}=req.body;
+    const user = await User.findOne({username});
+    if (user && (await bcrypt.compare(password, user.password))){
+      req.session.user = user;
+      res.redirect(`/${user.username}`);
+    } else {
+      res.redirect('/login')
+    }
+  })
+
 router
   .route('/signup')
   .get(sessionChecker, async (req, res) => {
     const tags = await Tag.find()
-    res.render('signup', {isSigned:true,tags});
+    res.render('signup', { tags });
   })
-  .post(async (req, res, next) => {
+  .post(async (req, res) => {
     
     try {
       const user= req.body;
             user.password = await bcrypt.hash(user.password, Number(process.env.SALT_ROUNDS))
-            
-      
       const newuser = new User(user);
       await newuser.save();
-      const users = await User.find()
-      console.log(users)
-      // req.session.user = user;
-      // res.redirect("/entries");
+      
     } catch (error) {
-      next(error);
+      res.render('singup',{error});
     }
   });
 
@@ -66,4 +63,32 @@ router
       res.redirect("/login");
     }
   });
+
+  router
+    .route('/search')
+    .post(async (req,res) =>{
+
+      const search = req.body.search.split(',')
+      const searchId = []
+      for (let i=0;i<search.length;i++){
+        const tag = await Tag.find({tag:search[i]})
+        const mentors = await User.find({tags:tag._id})
+        console.log(mentors)
+      }
+        
+     
+      
+      
+      // логика поиска
+    })
+
+  router
+    .route('/:user')
+    .get((req,res) => {
+
+    })
+
+
+
+
 module.exports = router;
