@@ -1,9 +1,15 @@
 const router = require('express').Router();
 const bcrypt = require('bcrypt');
-require('dotenv').config();
+if (process.env.Node_Env!=="production"){
+  require('dotenv').config();
+}
+
 const {sessionChecker}=require('../middleware/auth');
 const Tag = require('../models/tag.model');
 const User=require('../models/user.model')
+const multer=require('multer');
+const {storage}=require('../cloudinary');
+const upload=multer({storage})
 
 router.get('/',(req, res) => {
   res.redirect('home');
@@ -35,11 +41,15 @@ router
     const tags = await Tag.find()
     res.render('signup', {isSigned:true,tags});
   })
-  .post(async (req, res, next) => {
+  .post(upload.single('image'), async (req, res, next) => {
     
     try {
+      const image=req.file;
       const user= req.body;
-            user.password = await bcrypt.hash(user.password, Number(process.env.SALT_ROUNDS))
+            user.password = await bcrypt.hash(user.password, Number(process.env.SALT_ROUNDS));
+            user.image={url:image.path, filename:image.filename}
+          
+            console.log(user);
             
       
       const newuser = new User(user);

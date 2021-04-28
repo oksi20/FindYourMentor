@@ -1,7 +1,9 @@
    <div style="display: flex; justify-content: space-evenly; margin-top: 100px;">
    {{#each mentors}}
    <div class="card" style="width: 18rem;">
-  
+     {{#if this.image.url}}
+  <div class="card-head"><img src="{{this.image.url}}" style="width: 60px; height:70px" alt=""></div>
+  {{/if}}
     <div class="card-body">
     <h5 class="card-title">{{this.name}} {{this.lastname}}</h5>
     <p class="card-text">Опыт:{{this.experience}}</p>
