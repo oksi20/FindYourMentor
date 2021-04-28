@@ -47,6 +47,9 @@ filename:String
     minlength: 5,
     match: /^[A-Za-z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
   },
+  aboutMe:{
+    type:String
+  },
   
   tags:[{type:Schema.Types.ObjectId, ref:'Tag'}],
 
