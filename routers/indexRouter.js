@@ -53,10 +53,6 @@ router
 
             user.password = await bcrypt.hash(user.password, Number(process.env.SALT_ROUNDS));
             user.image={url:image.path, filename:image.filename}
-          
-   
-            
-      
 
       const newuser = new User(user);
       await newuser.save();

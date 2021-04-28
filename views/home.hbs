@@ -1,13 +1,12 @@
 <div style="display: flex; justify-content: center; margin-top: 100px;">
   {{#each mentors}}
-  <div class="card" style="width: 18rem;">
+  <div class="card text-center m-1" style="width: 13rem;">
     {{#if this.image.url}}
-    <div class="card-head"><img src="{{this.image.url}}" style="width: 60px; height:70px" alt=""></div>
+    <img src="{{this.image.url}}" alt="">
     {{/if }}
     <div class="card-body">
       <h5 class="card-title">{{this.name}} {{this.lastname}}</h5>
       <p class="card-text">Опыт:{{this.experience}}</p>
-      {{!-- <a href="#" class="btn btn-primary">Записаться</a> --}}
       <button type="button" class="btn btn-primary m-2" data-bs-toggle="modal"
         data-bs-target="#b{{this._id}}">Записаться</button>
       <button type="button" class="btn btn-primary m-2" data-bs-toggle="modal" data-bs-target="#a{{this._id}}">
@@ -28,7 +27,7 @@
           <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
         </div>
         <div class="modal-body">
-          <p>I'm from {{this.city}}, {{this.country}}. I have {{this.experience}} of experience</p>
+          <p>I'm from {{this.city}}, {{this.country}}. I have {{this.experience}} of experience. {{this.aboutMe}}</p>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
