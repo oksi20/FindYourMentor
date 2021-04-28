@@ -30,20 +30,12 @@
           <a class="nav-link" href="/signup">Стать ментором</a>
         </li>
      
-      <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/home">Home</a>
-        </li>
-      <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/profile">Profile</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" href="/logout" tabindex="-1" aria-disabled="true">Logout</a>
-        </li>
+     
         
         
       </ul>
-      <form class="d-flex">
-        <input class="form-control me-2" type="search" placeholder="Найти по тэгу" aria-label="Search">
+      <form class="d-flex" method="POST" action="/search">
+        <input name="search" class="form-control me-2" type="search" placeholder="Найти по тэгу" aria-label="Search">
         <button class="btn btn-outline-success" type="submit">Поиск</button>
       </form>
     </div>
