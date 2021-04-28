@@ -82,21 +82,38 @@ router
 
   router
     .route('/search')
-    .post(async (req,res) =>{
+    .post(async (req,res) => {
 
       const search = req.body.search.split(',')
-      const searchId = []
-      for (let i=0;i<search.length;i++){
-        const tag = await Tag.find({tag:search[i]})
-        const mentors = await User.find({tags:tag._id})
-        console.log(mentors)
+    
+      let searchId =[]
+      let mentors = []
+
+      let searchArr = search.map(el => {
+          let arrSplit= el.trim().toLowerCase().split('')
+          arrSplit[0] = arrSplit[0].toUpperCase()
+          return arrSplit.join('')
+        })
+      
+      for (let i=0;i<searchArr.length;i++) {
+        const tagId = await Tag.findOne({tag:searchArr[i]})
+        searchId.push(tagId._id)
       }
+      
+      for (let el of searchId) {
+        const mentor = await User.find({tags:el})
+        mentors.push(mentor)
+        }
+
+        mentors = mentors.flat()
+        mentors = mentors.map(el => JSON.stringify(el))
+        let result= [...new Set(mentors)]
+       
+        result = result.map(el => JSON.parse(el))
         
-     
-      
-      
-      // логика поиска
-    })
+
+        res.render('search', {result})
+      })
 
   router
     .route('/:user')
