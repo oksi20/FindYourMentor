@@ -1,38 +1,78 @@
-   <div style="display: flex; justify-content: center; margin-top: 100px;">
-   {{#each mentors}}
-   <div class="card" style="width: 18rem;">
-     {{#if this.image.url}}
-  <div class="card-head"><img src="{{this.image.url}}" style="width: 60px; height:70px" alt=""></div>
-  {{/if}}
+<div style="display: flex; justify-content: center; margin-top: 100px;">
+  {{#each mentors}}
+  <div class="card" style="width: 18rem;">
+    {{#if this.image.url}}
+    <div class="card-head"><img src="{{this.image.url}}" style="width: 60px; height:70px" alt=""></div>
+    {{/if }}
     <div class="card-body">
-    <h5 class="card-title">{{this.name}} {{this.lastname}}</h5>
-    <p class="card-text">Опыт:{{this.experience}}</p>
-    <a href="#" class="btn btn-primary">Записаться</a>
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target='#{{this.name}}'>
+      <h5 class="card-title">{{this.name}} {{this.lastname}}</h5>
+      <p class="card-text">Опыт:{{this.experience}}</p>
+      {{!-- <a href="#" class="btn btn-primary">Записаться</a> --}}
+      <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#b{{this._id}}">Записаться</button>
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#a{{this._id}}">
   Read more about Mentor
 </button>
+      
     </div>
-    </div>
+  </div>
 
-<!-- Modal -->
+  <!-- Modal -->
 
-<div class="modal fade" id='{{this.name}}' aria-labelledby="exampleModalLabel">
+  
+    <div class="modal fade" id="a{{this._id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Hi, my name is {{this.name}}</h5>
-        <button type="button" class="btn-close" data-dismiss="modal" aria-label="Close"></button>
+        <h5 class="modal-title" id="exampleModalLabel">{{this.name}}</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        So i love programming
+      <p>I'm from {{this.city}}, {{this.country}}. I have {{this.experience}} of experience</p>
       </div>
       <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-primary">Save changes</button>
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
       </div>
     </div>
   </div>
 </div>
-{{/each}}
-  </div>
 
+
+ <div class="modal fade" id="b{{this._id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Request this mentor</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="container row">
+    <div class="jumbotron col-sm-4 pull-center">
+        <form action="/{{this._id}}/request" method="post">
+            <div>
+                <label>Your name:</label>
+                <input type="text" name="clientName" />
+            </div>
+            <div>
+                <label>Your contact information</label>
+                <input type="text" name="clientContact" />
+            </div>
+            <div>
+                <label>Tell us more about you</label>
+                <input type="text" name="clientAbout" />
+            </div>
+            <div>
+                <input class="btn btn-primary" type="submit" value="Send">
+            </div>
+        </form>
+    </div>
+</div>
+      
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+      </div>
+    </div>
+  </div>
+</div>
+  {{/each }}
+</div>
