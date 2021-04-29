@@ -161,6 +161,20 @@ router
 
     })
 
+    router
+      .route('/:username/requests')
+      .get(async (req,res) => {
+
+      })
+      .post(async (req,res) => {
+
+      })
+
+    router
+      .route('/:id/request')
+      .post(async (req,res) => {
+
+      })
 
 
 
