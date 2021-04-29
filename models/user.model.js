@@ -53,6 +53,10 @@ const UserSchema = new Schema({
   
   tags:[{type:Schema.Types.ObjectId, ref:'Tag'}],
 
-  requests:[{type:Schema.Types.ObjectId, ref:'Request'}]
-});
+  requests:[{type:Schema.Types.ObjectId, ref:'Request'}],
+},
+  {
+    timestamps: true,
+  }
+);
 module.exports=model('users', UserSchema);

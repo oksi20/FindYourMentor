@@ -52,13 +52,17 @@ router
       const user= req.body;
 
             user.password = await bcrypt.hash(user.password, Number(process.env.SALT_ROUNDS));
+           if (image){
             user.image={url:image.path, filename:image.filename}
+           }
+            
 
       const newuser = new User(user);
       await newuser.save();
+      res.redirect('/home');
       
     } catch (error) {
-      res.render('singup',{error});
+      res.render('signup',{error});
     }
   });
 
@@ -115,8 +119,6 @@ router
     .route('/:username')
     .get(async (req,res) => {
       const user = await User.findOne({username:req.params.username}).populate('tags')
-      
-      console.log(user)
       res.render('profile',{ user })
     })
 

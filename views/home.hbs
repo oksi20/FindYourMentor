@@ -1,6 +1,7 @@
-<div style="display: flex; justify-content: center; margin-top: 100px;">
+{{!-- <div style="display:flex-wrap; justify-content: center; margin-top: 100px;"> --}}
+  <div class="container d-flex justify-content-center flex-wrap">
   {{#each mentors}}
-  <div class="card text-center m-1" style="width: 13rem;">
+  <div class="card text-center m-2" style="width: 14rem;">
     {{#if this.image.url}}
     <img src="{{this.image.url}}" alt="">
     {{/if }}

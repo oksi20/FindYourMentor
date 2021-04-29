@@ -1,17 +1,18 @@
-{{#each result}}
-
-   
-   <div class="card" style="width: 18rem;">
-     {{#if this.image.url}}
-  <div class="card-head"><img src="{{this.image.url}}" style="width: 60px; height:70px" alt=""></div>
-  {{/if}}
+<div class="container d-flex justify-content-center flex-wrap">
+  {{#each result}}
+  <div class="card text-center m-1" style="width: 14rem;">
+    {{#if this.image.url}}
+    <img src="{{this.image.url}}" alt="">
+    {{/if }}
     <div class="card-body">
-    <h5 class="card-title">{{this.name}} {{this.lastname}}</h5>
-    <p class="card-text">Опыт:{{this.experience}}</p>
-    <a href="#" class="btn btn-primary">Записаться</a>
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target='#{{this.name}}'>
-  Read more about Mentor
-</button>
+      <h5 class="card-title">{{this.name}} {{this.lastname}}</h5>
+      <p class="card-text">Опыт:{{this.experience}}</p>
+      <button type="button" class="btn btn-primary m-2" data-bs-toggle="modal"
+        data-bs-target="#b{{this._id}}">Записаться</button>
+      <button type="button" class="btn btn-primary m-2" data-bs-toggle="modal" data-bs-target="#a{{this._id}}">
+        Read about Mentor
+      </button>
     </div>
-    
-{{/each}}
+  </div>
+  {{/each}}
+</div>
