@@ -57,7 +57,9 @@ router
            }
       const newuser = new User(user);
       await newuser.save();
+
       req.session.user ={id:newuser._id, name:newuser.username};
+
       res.redirect(`/${newuser.username}`);
       
     } catch (error) {
@@ -100,7 +102,7 @@ router
       }
       
       for (let el of searchId) {
-        const mentor = await User.find({tags:el})
+        const mentor = await User.find({tags:el}).populate('tags')
         mentors.push(mentor)
         }
 
