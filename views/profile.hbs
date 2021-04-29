@@ -1,4 +1,18 @@
+
+<div class="container">
+  <ul class="nav nav-pills nav-justified">
+  
+  <li class="nav-item">
+    <a class="nav-link" aria-current="page" href="/{{user.username}}">Мой профиль</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" href="/{{user.username}}/requests">Мои заявки</a>
+  </li>
+  
+</ul>
+</div>
 <div class="container d-flex justify-content-center flex-wrap mt-3">
+  
   {{#if user}}
   <div class="card mb-3" style="max-width: 700px;">
     <div class="row g-0">
