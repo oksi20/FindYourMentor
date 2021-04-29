@@ -57,6 +57,7 @@ router
            }
       const newuser = new User(user);
       await newuser.save();
+      req.session.user ={id:newuser._id, name:newuser.username};
       res.redirect(`/${newuser.username}`);
       
     } catch (error) {
@@ -182,7 +183,9 @@ router
     router
     .route('/:username/requests/:id')
     .get(async (req, res)=>{
-      const user=await User.findOne({username:req.params.username})
+      const user=await User.findOne({username:req.params.username});
+      const requestId=req.params.id;
+      
     })
 
 
