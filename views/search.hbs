@@ -1,18 +1,97 @@
-<div class="container d-flex justify-content-center flex-wrap">
-  {{#each result}}
-  <div class="card text-center m-1" style="width: 14rem;">
-    {{#if this.image.url}}
-    <img src="{{this.image.url}}" alt="">
-    {{/if }}
-    <div class="card-body">
-      <h5 class="card-title">{{this.name}} {{this.lastname}}</h5>
-      <p class="card-text">Опыт:{{this.experience}}</p>
-      <button type="button" class="btn btn-primary m-2" data-bs-toggle="modal"
-        data-bs-target="#b{{this._id}}">Записаться</button>
-      <button type="button" class="btn btn-primary m-2" data-bs-toggle="modal" data-bs-target="#a{{this._id}}">
-        Read about Mentor
-      </button>
+ <div class="container d-flex justify-content-center flex-wrap m-auto">
+    {{#each result}}
+    <div class="card text-center m-3 p-2" style="width: 21rem; height:19rem">
+      <div class="row g-0">
+        <div class="col-md-6 bg-light text-dark">
+          {{#if this.image.url}}
+
+          <img src="{{this.image.url}}" alt="your profile picture here">
+
+          {{/if }}
+        </div>
+        <div class="col-md-6">
+          <div class="card-body">
+            <h5 class="card-title">{{this.name}} {{this.lastname}}</h5>
+            <p class="card-text">Опыт:{{this.experience}}</p>
+            <p style="font-size:10px">
+            {{#each this.tags}}
+            {{this.tag}}
+            {{/each}}
+            </p>
+            <button type="button" class="btn btn-primary m-1" data-bs-toggle="modal"
+              data-bs-target="#b{{this._id}}">Записаться</button>
+            <button type="button" class="btn btn-primary m-1" data-bs-toggle="modal" data-bs-target="#a{{this._id}}">
+              Подробнее
+            </button>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
-  {{/each}}
+
+    <!-- Modal About Mentor-->
+
+
+    <div class="modal fade" id="a{{this._id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">{{this.name}}</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+          </div>
+          <div class="modal-body">
+            <p>{{this.aboutMe}}</p>
+          </div>
+          <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          </div>
+        </div>
+      </div>
+    </div>
+    <!-- Modal to send Request -->
+
+
+  <div class="modal fade" id="b{{this._id}}" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Request this mentor</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <div class="container row">
+            <div class="jumbotron col-sm-4 pull-center">
+              <form action="/{{this._id}}/request" method="POST">
+                <div>
+                  <label>Имя</label>
+                  <input type="text" name="name"/>
+                </div>
+                
+                <div>
+                  <label>Фамилия</label>
+                  <input type="text" name="lastname"/>
+                </div>
+                <div>
+                  <label>Контакты</label>
+                  <input type="text" name="contact" />
+                </div>
+                <div>
+                  <label>О себе</label>
+                  <input type="text" name="about" />
+                </div>
+
+            </div>
+          </div>
+          
+          <div class="modal-footer">
+            <button class="btn btn-primary" type="submit">Оставить заявку</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
+          </div>
+          </form>
+        </div>
+        
+      </div>
+    </div>
+    </div>
+  
+  {{/each }}
 </div>
