@@ -48,25 +48,30 @@
         <div class="modal-body">
           <div class="container row">
             <div class="jumbotron col-sm-4 pull-center">
-              <form action="/{{this._id}}/request" method="post">
+              <form action="/{{this._id}}/request" method="POST">
                 <div>
-                  <label>Your name:</label>
-                  <input type="text" name="clientName" />
+                  <label>Имя</label>
+                  <input type="text" name="name"/>
+                </div>
+                
+                <div>
+                  <label>Фамилия</label>
+                  <input type="text" name="lastname"/>
                 </div>
                 <div>
-                  <label>Your contact information</label>
-                  <input type="text" name="clientContact" />
+                  <label>Контакты</label>
+                  <input type="text" name="contact" />
                 </div>
                 <div>
-                  <label>Tell us more about you</label>
-                  <input type="text" name="clientAbout" />
+                  <label>О себе</label>
+                  <input type="text" name="about" />
                 </div>
             </div>
           </div>
         </div>
         <div class="modal-footer">
-          <button class="btn btn-primary" type="submit">Send</button>
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+          <button class="btn btn-primary" type="submit">Оставить заявку</button>
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Закрыть</button>
         </div>
         </form>
       </div>

@@ -29,14 +29,14 @@ const options = {
   saveUninitialized: false,
   cookie: {
     secure: process.env.NODE_ENV === 'production',
-    expires: 1000 * 60 * 10,
+    expires: 10000 * 60 * 10,
   },
 };
 
 app.use(session(options));
 app.use(cookiesCleaner);
 app.use((req, res, next) => {
-  res.locals.user = req.session?.user;
+  res.locals.userLogined = req.session?.user;
   next();
 });
 

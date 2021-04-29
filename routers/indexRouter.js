@@ -9,6 +9,7 @@ const Tag = require('../models/tag.model');
 const User=require('../models/user.model')
 const multer=require('multer');
 const {storage}=require('../cloudinary');
+const Request = require('../models/request.model');
 const upload=multer({storage})
 
 router.get('/',(req, res) => {
@@ -17,6 +18,7 @@ router.get('/',(req, res) => {
 
 router.get('/home',async (req, res) => {
     const mentors = await User.find();
+    console.log(mentors);
     res.render('home', {mentors});
 });
 
@@ -30,7 +32,7 @@ router
     const {username, password}=req.body;
     const user = await User.findOne({username});
     if (user && (await bcrypt.compare(password, user.password))){
-      req.session.user ={id:user._id, name:user.name};
+      req.session.user ={id:user._id, name:user.username};
       res.redirect(`/${user.username}`);
     } else {
       res.redirect('/login')
@@ -160,7 +162,9 @@ router
     router
       .route('/:username/requests')
       .get(async (req,res) => {
-
+        const user = await User.findOne({username:req.params.username}).populate('requests')
+        const requests = user.requests
+        res.render('profile' ,{requests})
       })
       .post(async (req,res) => {
 
@@ -169,7 +173,9 @@ router
     router
       .route('/:id/request')
       .post(async (req,res) => {
-
+        const newRequest = await Request.create(req.body)
+        const user = await User.findOneAndUpdate({_id:req.params.id},{$push: {requests:newRequest._id} })
+        res.redirect('/home')
       })
 
 
