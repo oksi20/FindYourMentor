@@ -35,11 +35,12 @@ const options = {
 
 app.use(session(options));
 app.use(cookiesCleaner);
+app.use((req, res, next) => {
+  res.locals.user = req.session?.user;
+  next();
+});
 
 
-app.get('/modal', (req, res)=>{
-  res.render('modal')
-})
 app.use('/', indexRouter);
 app.get('/image', (req, res)=>{
   res.render('image')

@@ -24,19 +24,20 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="/home">Home</a>
         </li>
-        
+        {{#unless user}}
         <li class="nav-item">
           <a class="nav-link" href="/login">Войти</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/signup">Стать ментором</a>
         </li>
-     {{#if isSigned}}
+        {{/unless}}
+     {{#if user}}
       <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/profile">Profile</a>
+          <a class="nav-link active" aria-current="page" href="/{{user.name}}">Profile</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link disabled" href="/logout" tabindex="-1" aria-disabled="true">Logout</a>
+          <a class="nav-link" href="/logout" tabindex="-1" aria-disabled="true">Logout</a>
         </li> 
         {{/if}}
       </ul>
