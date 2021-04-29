@@ -1,4 +1,4 @@
-
+{{#if user}}
 <div class="container">
   <ul class="nav nav-pills nav-justified">
   
@@ -13,7 +13,7 @@
 </div>
 <div class="container d-flex justify-content-center flex-wrap mt-3">
   
-  {{#if user}}
+  
   <div class="card mb-3" style="max-width: 700px;">
     <div class="row g-0">
       <div class="col-md-4 bg-light text-white">
@@ -33,25 +33,29 @@
       <a href="/{{user._id}}/edit" class="btn btn-primary">Редактировать</a>
     </div>
   </div>
-  {{/if}}
+  
 </div>
+{{/if}}
 
-
-
-
-
-{{!-- original --}}
-{{!-- {{#if user}}
-<div class="card" style="width: 30rem;">
-  <img src="{{user.image.path}}" class="card-img-left" alt="...">
-  <div class="card-body">
-    <h5 class="card-title">{{user.name}} {{user.lastname}}</h5>
-    <p class="card-text">О себе: {{user.aboutMe}}</p>
-    <p class="card-text">Тэги:</p>
-    {{#each user.tags}}
-    <p class="card-text">{{this.tag}}</p>
-    {{/each}}
-    <a href="/{{user._id}}/edit" class="btn btn-primary">Редактировать</a>
-  </div>
+{{#if requests}}
+<div class="accordion" id="accordionExample"></div>
+{{#each requests}}
+  <div class="accordion-item">
+      <h2 class="accordion-header" id="headingOne">
+        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+          Заявка 
+        </button>
+      </h2>
+      <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+        <div class="accordion-body">
+          {{this.name}}
+          {{this.lastname}}
+          {{this.contact}}
+          {{this.about}}
+        </div>
+      </div>
+    </div>
+  
+{{/each}}
 </div>
-{{/if}} --}}
+{{/if}}

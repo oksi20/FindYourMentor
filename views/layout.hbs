@@ -26,7 +26,7 @@
         <li class="nav-item">
           <a class="nav-link active" aria-current="page" href="/home">Home</a>
         </li>
-        {{#unless user}}
+        {{#unless userLogined}}
         <li class="nav-item">
           <a class="nav-link" href="/login">Войти</a>
         </li>
@@ -34,9 +34,9 @@
           <a class="nav-link" href="/signup">Стать ментором</a>
         </li>
         {{/unless}}
-     {{#if user}}
+     {{#if userLogined}}
       <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="/{{user.name}}">Profile</a>
+          <a class="nav-link active" aria-current="page" href="/{{userLogined.name}}">Profile</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="/logout" tabindex="-1" aria-disabled="true">Logout</a>
