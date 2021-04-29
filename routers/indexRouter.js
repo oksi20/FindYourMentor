@@ -17,8 +17,9 @@ router.get('/',(req, res) => {
 });
 
 router.get('/home',async (req, res) => {
-    const mentors = await User.find();
-    console.log(mentors);
+
+    const mentors = await User.find().populate('tags');
+
     res.render('home', {mentors});
 });
 
