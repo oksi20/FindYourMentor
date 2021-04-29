@@ -16,9 +16,9 @@
             <p class="card-text">Опыт:{{this.experience}}</p>
             <p style="font-size:10px">
             {{#each this.tags}}
-{{this.tag}}
-{{/each}}
-</p>
+            {{this.tag}}
+            {{/each}}
+            </p>
             <button type="button" class="btn btn-primary m-1" data-bs-toggle="modal"
               data-bs-target="#b{{this._id}}">Записаться</button>
             <button type="button" class="btn btn-primary m-1" data-bs-toggle="modal" data-bs-target="#a{{this._id}}">
@@ -82,6 +82,7 @@
 
             </div>
           </div>
+          
           <div class="modal-footer">
             <button class="btn btn-primary" type="submit">Send</button>
             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -95,5 +96,7 @@
         </form>
       </div>
     </div>
-    {{/each }}
-  </div>
+    </div>
+  
+  {{/each }}
+</div>
