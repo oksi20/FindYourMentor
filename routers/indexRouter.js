@@ -165,7 +165,8 @@ router
       .get(async (req,res) => {
         const user = await User.findOne({username:req.params.username}).populate('requests')
         const requests = user.requests
-        res.render('profile' ,{requests})
+        const username=user.username;
+        res.render('profile' ,{requests, username})
       })
       .post(async (req,res) => {
 
@@ -178,7 +179,11 @@ router
         const user = await User.findOneAndUpdate({_id:req.params.id},{$push: {requests:newRequest._id} })
         res.redirect('/home')
       })
-
+    router
+    .route('/:username/requests/:id')
+    .get(async (req, res)=>{
+      const user=await User.findOne({username:req.params.username})
+    })
 
 
 module.exports = router;
