@@ -30,7 +30,7 @@ router
     const {username, password}=req.body;
     const user = await User.findOne({username});
     if (user && (await bcrypt.compare(password, user.password))){
-      req.session.user = user._id;
+      req.session.user ={id:user._id, name:user.name};
       res.redirect(`/${user.username}`);
     } else {
       res.redirect('/login')
@@ -45,21 +45,16 @@ router
   })
 
   .post(upload.single('image'), async (req, res, next) => {
-
-    
     try {
       const image=req.file;
       const user= req.body;
-
             user.password = await bcrypt.hash(user.password, Number(process.env.SALT_ROUNDS));
            if (image){
             user.image={url:image.path, filename:image.filename}
            }
-            
-
       const newuser = new User(user);
       await newuser.save();
-      res.redirect('/home');
+      res.redirect(`/${newuser.username}`);
       
     } catch (error) {
       res.render('signup',{error});
@@ -127,35 +122,36 @@ router
     .get(async (req,res) => {
 
       const user = await User.findOne({_id:req.params.id}).populate('tags')
-      
       let tags = await Tag.find().lean()
-
       const tagsWeHave = user.tags.map(el => el.tag)
-      
-     
-
       for (let i=0;i<tags.length;i++) {
         
         if (tagsWeHave.indexOf(tags[i].tag) !== -1 ) {
           tags[i].checked = true
-          
         } else {
           tags[i].checked = false
-          
         }
       }
-      
       res.render('edit', {user,tags})
      
 
      
     })
     .post(upload.single('image'),async (req,res) => {
-     
-      
-      const user = await User.findByIdAndUpdate({_id:req.params.id},req.body,{new:true})
+      const userNew=req.body;
+      const image=req.file;
+      console.log(image)
+      if (image){
+        userNew.image={url:image.path, filename:image.filename}
+      }
+      const user =await User.findByIdAndUpdate({_id:req.params.id},userNew,{new:true})
 
-      
+// console.log(image);
+// if (image){
+//   console.log(image);
+//   await User.findOneAndUpdate({_id:req.params.id}, {image:{url:image.path, filename:image.filename}})
+  // user.image={url:image.path, filename:image.filename}
+//  }
 
       res.redirect(`/${user.username}`)
 
