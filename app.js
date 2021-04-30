@@ -8,6 +8,7 @@ const FileStore = require('session-file-store')(session);
 
 
 const {cookiesCleaner}=require('./middleware/auth');
+const errorMiddleware=require('./middleware/error');
 const indexRouter=require('./routers/indexRouter')
 
 const app = express();
@@ -48,6 +49,6 @@ app.get('/image', (req, res)=>{
 app.post('/image', (req, res)=>{
   res.send(req.body)
 })
-// useErrorHandlers(app);
+errorMiddleware(app);
 
 module.exports = app;

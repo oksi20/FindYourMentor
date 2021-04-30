@@ -17,10 +17,13 @@ router.get('/',(req, res) => {
 });
 
 router.get('/home',async (req, res) => {
-
+  try {
     const mentors = await User.find().populate('tags');
-
     res.render('home', {mentors});
+  } catch(error){
+    next(error)
+  }
+    
 });
 
 router
@@ -31,6 +34,7 @@ router
 
   .post(async (req, res)=>{
     const {username, password}=req.body;
+    try{
     const user = await User.findOne({username});
     if (user && (await bcrypt.compare(password, user.password))){
       req.session.user ={id:user._id, name:user.username};
@@ -38,13 +42,21 @@ router
     } else {
       res.redirect('/login')
     }
+  } catch(error){
+    next(error)
+  }
   })
 
 router
   .route('/signup')
   .get(sessionChecker, async (req, res) => {
+    try{
     const tags = await Tag.find()
     res.render('signup', { tags });
+  } catch(error){
+    next(error)
+  }
+    
   })
 
   .post(upload.single('image'), async (req, res, next) => {
@@ -57,11 +69,8 @@ router
            }
       const newuser = new User(user);
       await newuser.save();
-
       req.session.user ={id:newuser._id, name:newuser.username};
-
-      res.redirect(`/${newuser.username}`);
-      
+      res.redirect(`/${newuser.username}`); 
     } catch (error) {
       res.render('signup',{error});
     }
@@ -97,30 +106,37 @@ router
         })
       
       for (let i=0;i<searchArr.length;i++) {
+       
         const tagId = await Tag.findOne({tag:searchArr[i]})
+      
         searchId.push(tagId._id)
+      
       }
       
       for (let el of searchId) {
+       
         const mentor = await User.find({tags:el}).populate('tags')
+      
         mentors.push(mentor)
         }
 
         mentors = mentors.flat()
         mentors = mentors.map(el => JSON.stringify(el))
         let result= [...new Set(mentors)]
-       
         result = result.map(el => JSON.parse(el))
-        
-
         res.render('search', {result})
       })
 
   router
     .route('/:username')
     .get(async (req,res) => {
+      try{
       const user = await User.findOne({username:req.params.username}).populate('tags')
       res.render('profile',{ user })
+    } catch(error){
+      next(error)
+    }
+      
     })
 
   router
@@ -129,9 +145,9 @@ router
 
       const user = await User.findOne({_id:req.params.id}).populate('tags')
       let tags = await Tag.find().lean()
+    
       const tagsWeHave = user.tags.map(el => el.tag)
       for (let i=0;i<tags.length;i++) {
-        
         if (tagsWeHave.indexOf(tags[i].tag) !== -1 ) {
           tags[i].checked = true
         } else {
@@ -151,14 +167,7 @@ router
         userNew.image={url:image.path, filename:image.filename}
       }
       const user =await User.findByIdAndUpdate({_id:req.params.id},userNew,{new:true})
-
-// console.log(image);
-// if (image){
-//   console.log(image);
-//   await User.findOneAndUpdate({_id:req.params.id}, {image:{url:image.path, filename:image.filename}})
-  // user.image={url:image.path, filename:image.filename}
-//  }
-
+    
       res.redirect(`/${user.username}`)
 
     })
@@ -166,7 +175,9 @@ router
     router
       .route('/:username/requests')
       .get(async (req,res) => {
+       
         const user = await User.findOne({username:req.params.username}).populate('requests')
+      
         const requests = user.requests
         const username=user.username;
         res.render('profile' ,{requests, username})
@@ -178,16 +189,27 @@ router
     router
       .route('/:id/request')
       .post(async (req,res) => {
+      
         const newRequest = await Request.create(req.body)
         const user = await User.findOneAndUpdate({_id:req.params.id},{$push: {requests:newRequest._id} })
+      
         res.redirect('/home')
       })
     router
     .route('/:username/requests/:id')
-    .get(async (req, res)=>{
-      const user=await User.findOne({username:req.params.username});
-      const requestId=req.params.id;
-      
+    .delete(async (req, res)=>{
+      const {username}=req.params;
+      const {id}=req.params;
+      try{
+      await Request.findOneAndDelete({_id:id})
+       await User.updateOne({username}, {$pull: {requests:id}});
+       res.send(id);
+      } catch(error){
+        next(error)
+      }
+      //  await User.updateOne({username},  {requests:[]});
+      // res.redirect(`/${username}/requests`);
+     
     })
 
 
