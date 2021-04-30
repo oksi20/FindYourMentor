@@ -29,8 +29,9 @@
           {{/each}}
           <p class="card-text"><small class="text-muted">Last updated {{user.updatedAt}}</small></p>
         </div>
+         <a href="/{{user._id}}/edit" class="btn btn-primary m-3">Редактировать</a>
       </div>
-      <a href="/{{user._id}}/edit" class="btn btn-primary">Редактировать</a>
+     
     </div>
   </div>
   
@@ -40,7 +41,7 @@
 {{#if requests}}
 <div class="accordion m-auto mt-3" style="width:60%" id="accordionExample">
 {{#each requests}}
-  <div class="accordion-item">
+  <div class="accordion-item" id="c{{this.id}}">
       <h2 class="accordion-header" id="headingOne{{this.name}}">
         <button class="accordion-button" type="button" data-bs-toggle="collapse" aria-expanded="true" data-bs-target="#collapseOne{{this.id}}"  aria-controls="collapseOne{{this.id}}">
           Заявка от {{this.name}}
@@ -48,10 +49,11 @@
       </h2>
       <div id="collapseOne{{this.id}}" class="accordion-collapse collapse" aria-labelledby="headingOne{{this.id}}" data-bs-parent="#accordionExample">
         <div class="accordion-body">
-          {{this.name}}
-          {{this.lastname}}
-          {{this.contact}}
-          {{this.about}}
+          <ul>
+<li>Привет, меня зовут {{this.name}}, {{this.lastname}}</li>
+<li>Мои контакты {{this.contact}}</li>
+<li>{{this.about}}</li>
+          </ul>
           <div>
             <a role="button" class="btn btn-secondary" href="/{{../username}}/requests/{{this.id}}">Удалить Заявку</a>
           </div>

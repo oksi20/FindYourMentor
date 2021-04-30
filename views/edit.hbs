@@ -1,80 +1,84 @@
-<div class="container">
-<form id="editForm" method="POST" action="/{{user._id}}/edit/" enctype="multipart/form-data">
+<div class="container d-flex flex-column align-items-center">
+  <form id="editForm" class="d-flex flex-column align-items-center" method="POST" action="/{{user._id}}/edit/"
+    enctype="multipart/form-data" style="width: 75%;">
 
-  <h1>Редактирование профиля</h1>
- <div class="input-group mb-3">
-  <span class="input-group-text" id="basic-addon1">Profile picture</span>
-  <input id="image" class="form-control" name="image" type="file">
+    <h1>Редактирование профиля</h1>
+    <div class="input-group mb-3">
+      <span class="input-group-text col-2" id="basic-addon1">Profile picture</span>
+      <input id="image" class="form-control" name="image" type="file">
     </div>
 
     <div class="input-group mb-3">
-  <span class="input-group-text" id="basic-addon1">Username</span>
-  <input id="username" class="form-control" name="username" type="text" disabled pattern="[A-Za-z]\w+" minlength="4"
+      <span class="input-group-text col-2" id="basic-addon1">Username</span>
+      <input id="username" class="form-control" name="username" type="text" disabled pattern="[A-Za-z]\w+" minlength="4"
         title="Латинские буквы, цифры и _" value="{{user.username}}">
     </div>
 
     <div class="input-group mb-3">
-  <span class="input-group-text" id="basic-addon1">Email</span>
-  <input id="email" class="form-control" name="email" type="email" required value="{{user.email}}">
+      <span class="input-group-text col-2" id="basic-addon1">Email</span>
+      <input id="email" class="form-control" name="email" type="email" required value="{{user.email}}">
     </div>
 
- 
+
 
     <div class="input-group mb-3">
-  <span class="input-group-text" id="basic-addon1">Имя</span>
-  <input id="name" class="form-control" name="name" type="text" disabled value="{{user.name}}">
-    </div>
-
-    <div class="input-group mb-3">
-  <span class="input-group-text" id="basic-addon1">Фамилия</span>
-  <input id="lastname" class="form-control" name="lastname" type="text" disabled value="{{user.lastname}}">
+      <span class="input-group-text col-2" id="basic-addon1">Имя</span>
+      <input id="name" class="form-control" name="name" type="text" disabled value="{{user.name}}">
     </div>
 
     <div class="input-group mb-3">
-  <span class="input-group-text" id="basic-addon1">Страна</span>
-  <input id="country" class="form-control" name="country" type="text" required value="{{user.country}}">
+      <span class="input-group-text col-2" id="basic-addon1">Фамилия</span>
+      <input id="lastname" class="form-control" name="lastname" type="text" disabled value="{{user.lastname}}">
     </div>
 
     <div class="input-group mb-3">
-  <span class="input-group-text" id="basic-addon1">Город</span>
-  <input id="city" class="form-control" name="city" type="text" required value="{{user.city}}">
+      <span class="input-group-text col-2" id="basic-addon1">Страна</span>
+      <input id="country" class="form-control" name="country" type="text" required value="{{user.country}}">
     </div>
 
     <div class="input-group mb-3">
-  <span class="input-group-text" id="basic-addon1">Опыт работы</span>
-  <input id="experience" class="form-control" name="experience" type="text" required value="{{user.experience}}">
+      <span class="input-group-text col-2" id="basic-addon1">Город</span>
+      <input id="city" class="form-control" name="city" type="text" required value="{{user.city}}">
+    </div>
+
+    <div class="input-group mb-3">
+      <span class="input-group-text col-2" id="basic-addon1">Опыт работы</span>
+      <input id="experience" class="form-control" name="experience" type="text" required value="{{user.experience}}">
     </div>
 
     <div class="input-group">
-  <span class="input-group-text">О себе</span>
-  <textarea class="form-control" aria-label="With textarea" id="aboutMe" name="aboutMe">{{user.aboutMe}}</textarea>
+      <span class="input-group-text col-2">О себе</span>
+      <textarea class="form-control" aria-label="With textarea" id="aboutMe" name="aboutMe">{{user.aboutMe}}</textarea>
     </div>
-    <span>Тэги</span>
-  
-  {{#each tags}}
-  
-  {{#if this.checked}}
-    <div class="container">
-  <div class="form-check">
-  <input class="form-check-input" type="checkbox" value="{{this._id}}" name="tags" id="flexCheckDefault" checked>
-  <label class="form-check-label" for="flexCheckDefault">
-    {{this.tag}}
-  </label>
-  </div>
-  </div>
-  {{/if}}
-  <div class="container">
-  <div class="form-check">
-  <input class="form-check-input" type="checkbox" value="{{this._id}}" name="tags" id="flexCheckDefault">
-  <label class="form-check-label" for="flexCheckDefault">
-    {{this.tag}}
-  </label>
-  </div>
-  </div>
-  {{/each}}
-  
-  <br>
-  <button type="submit" class="btn btn-primary">Сохранить</button>
-  <a type="button" class="btn btn-primary" href="/{{user.name}}">Отменить</button>
-</form>
+    <span class="mt-4 mb-3 text-primary">Твои навыки:</span>
+    <div class="container d-flex flex-column flex-wrap" style="max-height: 300px;">
+      {{#each tags}}
+      {{#if this.checked}}
+      
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="{{this._id}}" name="tags" id="flexCheckDefault"
+            checked>
+          <label class="form-check-label" for="flexCheckDefault">
+            {{this.tag}}
+          </label>
+        </div>
+      
+      {{/if}}
+      
+        <div class="form-check">
+          <input class="form-check-input" type="checkbox" value="{{this._id}}" name="tags" id="flexCheckDefault">
+          <label class="form-check-label" for="flexCheckDefault">
+            {{this.tag}}
+          </label>
+        </div>
+      
+      {{/each}}
+    </div>
+    <br>
+    <div class='mb-4'>
+<button type="submit" class="btn btn-primary">Сохранить</button>
+    <a role="button" class="btn btn-primary" href="/{{user.name}}">Отменить</a>
+    </div>
+    
+  </form>
 </div>

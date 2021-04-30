@@ -1,60 +1,62 @@
-<div class="container">
-<form id="signupForm" method="POST" action="/signup" enctype="multipart/form-data">
+<div class="container d-flex flex-column align-items-center" >
+  <h1 class="m-3 p-2">Стать ментором</h1>
+<form id="signupForm" class="d-flex flex-column align-items-center " method="POST" action="/signup" enctype="multipart/form-data" style="width: 75%; margin:auto">
 
-  <h1>Стать ментором</h1>
+  
  <div class="input-group mb-3">
-  <span class="input-group-text" id="basic-addon1">Profile picture</span>
+  <span class="input-group-text col-2" id="basic-addon1">Profile picture</span>
   <input id="image" class="form-control" name="image" type="file">
     </div>
 
     <div class="input-group mb-3">
-  <span class="input-group-text" id="basic-addon1">Username</span>
+  <span class="input-group-text col-2" id="username">Username</span>
   <input id="username" class="form-control" name="username" type="text" required pattern="[A-Za-z]\w+" minlength="4"
-        title="Латинские буквы, цифры и _">
+        title="Латинские буквы, цифры и _" >
     </div>
 
     <div class="input-group mb-3">
-  <span class="input-group-text" id="basic-addon1">Email</span>
+  <span class="input-group-text col-2 text-center" id="basic-addon1">Email</span>
   <input id="email" class="form-control" name="email" type="email" required>
     </div>
 
     <div class="input-group mb-3">
-  <span class="input-group-text" id="basic-addon1">Пароль</span>
+  <span class="input-group-text col-2" id="basic-addon1">Пароль</span>
   <input id="password" class="form-control" name="password" type="password" required>
     </div>
 
     <div class="input-group mb-3">
-  <span class="input-group-text" id="basic-addon1">Имя</span>
+  <span class="input-group-text col-2" id="basic-addon1">Имя</span>
   <input id="name" class="form-control" name="name" type="text" required>
     </div>
 
     <div class="input-group mb-3">
-  <span class="input-group-text" id="basic-addon1">Фамилия</span>
+  <span class="input-group-text col-2" id="basic-addon1">Фамилия</span>
   <input id="lastname" class="form-control" name="lastname" type="text" required>
     </div>
 
     <div class="input-group mb-3">
-  <span class="input-group-text" id="basic-addon1">Страна</span>
+  <span class="input-group-text col-2" id="basic-addon1">Страна</span>
   <input id="country" class="form-control" name="country" type="text" required>
     </div>
 
     <div class="input-group mb-3">
-  <span class="input-group-text" id="basic-addon1">Город</span>
+  <span class="input-group-text col-2" id="basic-addon1">Город</span>
   <input id="city" class="form-control" name="city" type="text" required>
     </div>
 
     <div class="input-group mb-3">
-  <span class="input-group-text" id="basic-addon1">Опыт работы</span>
+  <span class="input-group-text col-2" id="basic-addon1">Опыт работы</span>
   <input id="experience" class="form-control" name="experience" type="text" required>
     </div>
 
     <div class="input-group">
-  <span class="input-group-text">О себе</span>
+  <span class="input-group-text col-2">О себе</span>
   <textarea class="form-control" aria-label="With textarea" id="aboutMe" name="aboutMe"></textarea>
     </div>
-    <span>Тэги</span>
+   
+    <span class="mt-4 mb-3 text-primary">Твои навыки:</span>
 
-  <div class="container">
+  <div class="container d-flex flex-column flex-wrap" style="max-height: 300px;">
   {{#each tags}}
   
   <div class="form-check">
@@ -68,6 +70,6 @@
   </div>
   
   <br>
-  <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
+  <button type="submit" class="mb-5 btn btn-primary">Зарегистрироваться</button>
 </form>
 </div>
