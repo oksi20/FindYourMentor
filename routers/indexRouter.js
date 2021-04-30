@@ -1,8 +1,8 @@
 const router = require('express').Router();
 const bcrypt = require('bcrypt');
-if (process.env.Node_Env!=="production"){
+// if (process.env.Node_Env!=="production"){
   require('dotenv').config();
-}
+// }
 
 const {sessionChecker}=require('../middleware/auth');
 const Tag = require('../models/tag.model');

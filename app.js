@@ -32,7 +32,7 @@ const options = {
   resave: false,
   saveUninitialized: false,
   cookie: {
-    secure: process.env.NODE_ENV === 'production',
+    // secure: process.env.NODE_ENV === 'production',
     expires: 10000 * 60 * 10,
   },
   store: MongoStore.create({ mongoUrl })
