@@ -107,24 +107,30 @@ router
       
       for (let i=0;i<searchArr.length;i++) {
        
-        const tagId = await Tag.findOne({search:searchArr[i]})
-      
-        searchId.push(tagId._id)
-      
-      }
-      
-      for (let el of searchId) {
-       
-        const mentor = await User.find({tags:el}).populate('tags')
-      
-        mentors.push(mentor)
-        }
 
-        mentors = mentors.flat()
-        mentors = mentors.map(el => JSON.stringify(el))
-        let result= [...new Set(mentors)]
-        result = result.map(el => JSON.parse(el))
-        res.render('search', {result})
+        const tagId = await Tag.findOne({search:searchArr[i]})
+        if (tagId){
+           searchId.push(tagId._id)
+         }
+        
+      }
+      if (searchId.length>0){
+        for (let el of searchId) {
+       
+          const mentor = await User.find({tags:el}).populate('tags')
+        
+          mentors.push(mentor)
+          }
+  
+          mentors = mentors.flat()
+          mentors = mentors.map(el => JSON.stringify(el))
+          let result= [...new Set(mentors)]
+          result = result.map(el => JSON.parse(el))
+          res.render('search', {result})
+      }
+      else {
+        res.render('search', {message:true})
+      }
       })
 
   router
