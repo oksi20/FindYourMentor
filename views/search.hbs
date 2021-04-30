@@ -1,4 +1,5 @@
  <div class="container d-flex justify-content-center flex-wrap m-auto">
+   {{#if result}}
     {{#each result}}
     <div class="card text-center m-3 p-2" style="width: 21rem; height:19rem">
       <div class="row g-0">
@@ -94,4 +95,10 @@
     </div>
   
   {{/each }}
+  {{/if}}
+  {{#if message}}
+  <div class="alert alert-danger" role="alert">
+  Ничего не найдено.
+</div>
+  {{/if}}
 </div>
