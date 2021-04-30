@@ -99,19 +99,19 @@ router
       let searchId =[]
       let mentors = []
 
-      let searchArr = search.map(el => {
-          let arrSplit= el.trim().toLowerCase().split('')
-          arrSplit[0] = arrSplit[0].toUpperCase()
-          return arrSplit.join('')
-        })
+      let searchArr = search.map(el => 
+          el.trim().toLowerCase()
+        
+        )
+        console.log(searchArr);
       
       for (let i=0;i<searchArr.length;i++) {
        
-        const tagId = await Tag.findOne({tag:searchArr[i]})
-        if (tagId)
-      {
-        searchId.push(tagId._id)
-      }
+
+        const tagId = await Tag.findOne({search:searchArr[i]})
+        if (tagId){
+           searchId.push(tagId._id)
+         }
         
       }
       if (searchId.length>0){
