@@ -64,20 +64,21 @@
               <form action="/{{this._id}}/request" method="POST">
                 <div>
                   <label>Имя</label>
-                  <input type="text" name="name"/>
+                  <input type="text" name="name" required/>
+                   
                 </div>
                 
                 <div>
                   <label>Фамилия</label>
-                  <input type="text" name="lastname"/>
+                  <input type="text" name="lastname" required/>
                 </div>
                 <div>
                   <label>Контакты</label>
-                  <input type="text" name="contact" />
+                  <input type="text" name="contact" required/>
                 </div>
                 <div>
                   <label>О себе</label>
-                  <input type="text" name="about" />
+                  <input type="text" name="about" required/>
                 </div>
 
             </div>
