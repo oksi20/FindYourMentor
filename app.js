@@ -4,7 +4,10 @@ const path = require('path');
 const hbs = require('hbs');
 const cookieParser = require("cookie-parser");
 const session = require('express-session');
-const FileStore = require('session-file-store')(session);
+// const FileStore = require('session-file-store')(session);
+require('dotenv').config();
+const MongoStore = require('connect-mongo');
+const mongoUrl = process.env.DB_URL;
 
 
 const {cookiesCleaner}=require('./middleware/auth');
@@ -23,7 +26,7 @@ app.use(express.json());
 app.use(cookieParser());
 
 const options = {
-  store: new FileStore(),
+  // store: new FileStore(),
   key: 'user_sid',
   secret: 'fsjdhfsdg89dsghg',
   resave: false,
@@ -32,6 +35,7 @@ const options = {
     secure: process.env.NODE_ENV === 'production',
     expires: 10000 * 60 * 10,
   },
+  store: MongoStore.create({ mongoUrl })
 };
 
 app.use(session(options));
