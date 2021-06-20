@@ -2,6 +2,12 @@
 
 Сервис по поиску наставников и менторов.
 
+<img src="picsGH/home.png" width="470">
+<img src="picsGH/request.png" width="470">
+<img src="picsGH/register.png" width="470">
+<img src="picsGH/profile.png" width="470">
+<img src="picsGH/allrequests.png" width="470">
+
 # Использованные технологии
 
 * Node.Js
